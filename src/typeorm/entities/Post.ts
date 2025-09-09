@@ -1,9 +1,8 @@
-import { Entity } from '@nestjs/common';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './users';
 
-@Entity( {name: 'user_posts'} )
-export class Posts {
-
+@Entity({ name: 'user_posts' })
+export class Post {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,4 +11,7 @@ export class Posts {
 
   @Column()
   description: string;
+
+  @ManyToOne(() => User, (user) => user.posts)
+  user: User;
 }
